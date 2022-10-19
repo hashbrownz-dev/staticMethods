@@ -10,6 +10,14 @@ class Governor{
     static addressPublic(){
         console.log("Time to shake some hands and kiss some babies, but I'm all out of babies...");
     }
+    /**
+     * approveBudget takes a budget object, adds the values of each sector, and compares the total to annualTaxRevenue.  If the total spending is less than or equal to the annualTaxRevenue, approveBudget will return an approval message as a string, otherwise it will return a rejection message as a string
+     * @param {Object} budget an object containing sectors and their budget for the year
+     * @return {string} A string containing either an approval message or a rejection message
+     */
+     static approveBudget(budget){
+        return budget.total <= annualTaxRevenue ? "This budget proposal has received approval." : "This budget proposal has been rejected.";
+    }
 }
 
 //Test enactLaw
