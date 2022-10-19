@@ -51,10 +51,61 @@ class Person{
     }
 }
 
+class PostalWorker extends Person{
+    deliverMail(){
+        console.log('The mail was delivered!');
+    }
+    drive(){
+        console.log('Vrooooooom!');
+    }
+    lickStamps(){
+        console.log('These envelopes are making me thirsty!');
+    }
+}
+
+class Chef extends Person{
+    cook(food){
+        if(food){
+            console.log(`I make the best ${food} this side of the Mississippi!`);
+        } else {
+            console.log('Everything here starts in a box and ends in a microwave...');
+        }
+    }
+    spitInFood(){
+        console.log('I hope they like extra seasoning...');
+    }
+    evictPatron(){
+        console.log('Get out of my restaurant!  No soup for you!!!');
+    }
+}
+
 const pepe = new Person('PePe', 'M', 28);
 pepe.greet();
 pepe.eat('chicken');
 pepe.sleep();
+
+const phil = new PostalWorker('Phil Lamarr', 'M', '30');
+phil.energyLevel = 'Over 9000';
+phil.greet();
+phil.eat('boogers');
+//phil doesn't sleep...
+
+const mo = new PostalWorker('Mo Collins', 'F', '28');
+mo.greet();
+//no one has ever seen mo eat...
+mo.sleep();
+
+const gordon = new Chef('Gordon Ramsay', 'M', 55);
+const giada = new Chef('Giada De Laurentiis', 'F', 52);
+
+gordon.greet();
+gordon.cook('Idiot Sandwich');
+gordon.evictPatron();
+
+giada.greet();
+giada.forehead = 'Really big';
+giada.cook();
+giada.spitInFood();
 
 //The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
 
