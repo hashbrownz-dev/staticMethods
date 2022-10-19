@@ -215,7 +215,22 @@ class Money{
         return Number(output.replaceAll(',',''));
     }
     static toString(int){
+        //split our integer into an array 1234 -> '1234' -> ['1','2','3','4']
         const array = int.toString().split('');
+        //divide our array into chunks ['1','2','3','4'] -> [['1'],['2','3','4']]
+        const triplets = [];
+        while(array.length > 3){
+            triplets.unshift(array.splice(array.length-3,3));
+        }
+        //initialize our output string
+        let output = "$ ";
+        //Add the remaining digits in array.
+        output += array.join('');
+        //join each triplet into a single string and append them to our output
+        for(let i = 0; i < triplets.length; i++){
+            output += ',' + triplets[i].join('');
+        }
+        return output;
     }
 }
 
