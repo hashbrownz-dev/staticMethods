@@ -98,6 +98,34 @@ class Chef extends Person{
 // giada.cook();
 // giada.spitInFood();
 
+//EXXXTRA
+
+//a class for formatting strings to numbers and numbers to strings with monetary formatting
+class Money{
+    static toInt(string){
+        let output = string.replace('$','');
+        return Number(output.replaceAll(',',''));
+    }
+    static toString(int){
+        //split our integer into an array 1234 -> '1234' -> ['1','2','3','4']
+        const array = int.toString().split('');
+        //divide our array into chunks ['1','2','3','4'] -> [['1'],['2','3','4']]
+        const triplets = [];
+        while(array.length > 3){
+            triplets.unshift(array.splice(array.length-3,3));
+        }
+        //initialize our output string
+        let output = "$";
+        //Add the remaining digits in array.
+        output += array.join('');
+        //join each triplet into a single string and append them to our output
+        for(let i = 0; i < triplets.length; i++){
+            output += ',' + triplets[i].join('');
+        }
+        return output;
+    }
+}
+
 //STREEEEEEEETCH
 
 class BankAccount {
@@ -120,7 +148,7 @@ class BankAccount {
         this.balance -= amount;
     }
     get getBalance(){
-        return `Name: ${this.ownerName} Balance: ${this.balance} Account Number: ${this.accountNumber}`;    //We'll change this after we finish the Money Class
+        return `Name: ${this.ownerName} Balance: ${Money.toString(this.balance)} Account Number: ${this.accountNumber}`;    //We'll change this after we finish the Money Class
     }
 }
 
@@ -168,10 +196,10 @@ patsChecking.withdraw(40);
 
 class BudgetProposal{
     constructor(infrastructure = '10,000,000', education = '10,000,000', lawEnforcement = '10,000,000', emergencyServices = '10,000,000'){
-        this.infrastructure = infrastructure;
-        this.education = education;
-        this.lawEnforcement = lawEnforcement;
-        this.emergencyServices = emergencyServices;
+        this.infrastructure = Money.toInt(infrastructure);
+        this.education = Money.toInt(education);
+        this.lawEnforcement = Money.toInt(lawEnforcement);
+        this.emergencyServices = Money.toInt(emergencyServices);
     }
     /**
      * total returns the budget total as an integer
@@ -182,7 +210,7 @@ class BudgetProposal{
         for(let sector in this){
             //Each properties value is a string, with commas.  The following code removes any commas from the string and converts it to a number before adding it to the total.
             //total += Number(this[sector].replaceAll(',',''));
-            total += Money.toInt(this[sector]);
+            total += this[sector];
         }
         return total;
     }
@@ -192,21 +220,10 @@ class BudgetProposal{
     get breakdown(){
         let breakdown = 'Budget Proposal:\n';
         for(let sector in this){
-            breakdown+=sector + ': ' + this[sector] + '\n';
+            breakdown+=sector + ': ' + Money.toString(this[sector]) + '\n';
         }
-        breakdown += 'Total: ' + this.total;
+        breakdown += 'Total: ' + Money.toString(this.total);
         return breakdown;
-    }
-}
-
-//a class for formatting strings to numbers and numbers to strings with monetary formatting
-class Money{
-    static toInt(string){
-        let output = string.replace('$','');
-        return Number(output.replaceAll(',',''));
-    }
-    static toString(int){
-        const array = int.toString().split('');
     }
 }
 
@@ -219,3 +236,9 @@ const budgetProposals = [
     new BudgetProposal(), //create a budget proposal with default values,
     new BudgetProposal('1,000,000','500,000','38,000,000','500,000')
 ]
+
+//Test these Budgets
+for(let proposal of budgetProposals){
+    console.log(proposal.breakdown);
+    console.log(Governor.approveBudget(proposal));
+}
