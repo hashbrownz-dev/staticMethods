@@ -70,6 +70,7 @@ class Chef extends Person{
     }
 }
 
+<<<<<<< HEAD
 const pepe = new Person('PePe', 'M', 28);
 pepe.greet();
 pepe.eat('chicken');
@@ -97,3 +98,154 @@ giada.greet();
 giada.forehead = 'Really big';
 giada.cook();
 giada.spitInFood();
+=======
+// const pepe = new Person('PePe', 'M', 28);
+// pepe.greet();
+// pepe.eat('chicken');
+// pepe.sleep();
+
+// const phil = new PostalWorker('Phil Lamarr', 'M', '30');
+// phil.energyLevel = 'Over 9000';
+// phil.greet();
+// phil.eat('boogers');
+// //phil doesn't sleep...
+
+// const mo = new PostalWorker('Mo Collins', 'F', '28');
+// mo.greet();
+// //no one has ever seen mo eat...
+// mo.sleep();
+
+// const gordon = new Chef('Gordon Ramsay', 'M', 55);
+// const giada = new Chef('Giada De Laurentiis', 'F', 52);
+
+// gordon.greet();
+// gordon.cook('Idiot Sandwich');
+// gordon.evictPatron();
+
+// giada.greet();
+// giada.forehead = 'Really big';
+// giada.cook();
+// giada.spitInFood();
+
+//STREEEEEEEETCH
+
+class BankAccount {
+    constructor(ownerName, balance){
+        this.ownerName = ownerName;
+        this.balance = Number.isInteger(balance) ? balance : Money.toInt(balance);
+        this.accountNumber = BankAccount.generateAccountNumber();
+    }
+    static generateAccountNumber(){
+        const accountNumber = [];
+        for(let i = 0; i < 9; i++){
+            accountNumber.push(Math.floor(Math.random() * 10));
+        }
+        return Number(accountNumber.join(''));
+    }
+    deposit(amount){
+        this.balance += amount;
+    }
+    withdraw(amount){
+        this.balance -= amount;
+    }
+    get getBalance(){
+        return `Name: ${this.ownerName} Balance: ${this.balance} Account Number: ${this.accountNumber}`;    //We'll change this after we finish the Money Class
+    }
+}
+
+class CheckingAccount extends BankAccount{
+    withdraw(amount){
+        if(amount > this.balance && !this.overdraftEnabled){
+            console.log('Insufficient Funds!');
+        } else {
+            this.balance -= amount;
+        }
+    }
+}
+CheckingAccount.prototype.overdraftEnabled = false;
+
+class SavingsAccount extends BankAccount{
+    withdraw(amount){
+        console.log('Withdrawals are not permitted on this account!');
+    }
+}
+
+//Create a new Checking Account
+const jimsChecking = new CheckingAccount('Jim Henson', 5000);
+//Log Account Info and Balance
+console.log(jimsChecking.getBalance);
+//Withdraw 40 Dollars
+jimsChecking.withdraw(40);
+//Log Updated Account Info and Balance
+console.log(jimsChecking.getBalance)
+//Attempt to overdraw account with overdraftEnabled set to false
+jimsChecking.withdraw(5000);
+//Attempt to overdraw account with overdraftEnabled set to true
+jimsChecking.overdraftEnabled = true;
+jimsChecking.withdraw(5000);
+//Log Updated Account Info and Balance
+console.log(jimsChecking.getBalance);
+
+//Create a new Savings Account
+const patsChecking = new SavingsAccount('Patricia Benatar', 80);
+//Log Account Info and Balance
+console.log(patsChecking.getBalance);
+//Attempt to withdraw 40 Dollars
+patsChecking.withdraw(40);
+
+//The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
+
+class BudgetProposal{
+    constructor(infrastructure = '10,000,000', education = '10,000,000', lawEnforcement = '10,000,000', emergencyServices = '10,000,000'){
+        this.infrastructure = infrastructure;
+        this.education = education;
+        this.lawEnforcement = lawEnforcement;
+        this.emergencyServices = emergencyServices;
+    }
+    /**
+     * total returns the budget total as an integer
+     * @return {Number} the budget total as an integer
+     */
+    get total(){
+        let total = 0;
+        for(let sector in this){
+            //Each properties value is a string, with commas.  The following code removes any commas from the string and converts it to a number before adding it to the total.
+            //total += Number(this[sector].replaceAll(',',''));
+            total += Money.toInt(this[sector]);
+        }
+        return total;
+    }
+    /**
+     * breakdown returns the budget as an easily read string
+     */
+    get breakdown(){
+        let breakdown = 'Budget Proposal:\n';
+        for(let sector in this){
+            breakdown+=sector + ': ' + this[sector] + '\n';
+        }
+        breakdown += 'Total: ' + this.total;
+        return breakdown;
+    }
+}
+
+//a class for formatting strings to numbers and numbers to strings with monetary formatting
+class Money{
+    static toInt(string){
+        let output = string.replace('$','');
+        return Number(output.replaceAll(',',''));
+    }
+    static toString(int){
+        const array = int.toString().split('');
+    }
+}
+
+const annualTaxRevenue = 40000000;
+
+const budgetProposalOne = new BudgetProposal('20,000,000','1,000,000','30,000,000','2,000,000');
+const budgetProposals = [
+    budgetProposalOne,
+    new BudgetProposal('10,000,000','15,000,000','7,500,000','7,500,000'),
+    new BudgetProposal(), //create a budget proposal with default values,
+    new BudgetProposal('1,000,000','500,000','38,000,000','500,000')
+]
+>>>>>>> stretch
