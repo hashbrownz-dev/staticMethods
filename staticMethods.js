@@ -79,33 +79,33 @@ class Chef extends Person{
     }
 }
 
-const pepe = new Person('PePe', 'M', 28);
-pepe.greet();
-pepe.eat('chicken');
-pepe.sleep();
+// const pepe = new Person('PePe', 'M', 28);
+// pepe.greet();
+// pepe.eat('chicken');
+// pepe.sleep();
 
-const phil = new PostalWorker('Phil Lamarr', 'M', '30');
-phil.energyLevel = 'Over 9000';
-phil.greet();
-phil.eat('boogers');
-//phil doesn't sleep...
+// const phil = new PostalWorker('Phil Lamarr', 'M', '30');
+// phil.energyLevel = 'Over 9000';
+// phil.greet();
+// phil.eat('boogers');
+// //phil doesn't sleep...
 
-const mo = new PostalWorker('Mo Collins', 'F', '28');
-mo.greet();
-//no one has ever seen mo eat...
-mo.sleep();
+// const mo = new PostalWorker('Mo Collins', 'F', '28');
+// mo.greet();
+// //no one has ever seen mo eat...
+// mo.sleep();
 
-const gordon = new Chef('Gordon Ramsay', 'M', 55);
-const giada = new Chef('Giada De Laurentiis', 'F', 52);
+// const gordon = new Chef('Gordon Ramsay', 'M', 55);
+// const giada = new Chef('Giada De Laurentiis', 'F', 52);
 
-gordon.greet();
-gordon.cook('Idiot Sandwich');
-gordon.evictPatron();
+// gordon.greet();
+// gordon.cook('Idiot Sandwich');
+// gordon.evictPatron();
 
-giada.greet();
-giada.forehead = 'Really big';
-giada.cook();
-giada.spitInFood();
+// giada.greet();
+// giada.forehead = 'Really big';
+// giada.cook();
+// giada.spitInFood();
 
 //STREEEEEEEETCH
 
@@ -128,7 +128,50 @@ class BankAccount {
     withdraw(amount){
         this.balance -= amount;
     }
+    get getBalance(){
+        return `Name: ${this.ownerName} Balance: ${this.balance} Account Number: ${this.accountNumber}`;    //We'll change this after we finish the Money Class
+    }
 }
+
+class CheckingAccount extends BankAccount{
+    withdraw(amount){
+        if(amount > this.balance && !this.overdraftEnabled){
+            console.log('Insufficient Funds!');
+        } else {
+            this.balance -= amount;
+        }
+    }
+}
+CheckingAccount.prototype.overdraftEnabled = false;
+
+class SavingsAccount extends BankAccount{
+    withdraw(amount){
+        console.log('Withdrawals are not permitted on this account!');
+    }
+}
+
+//Create a new Checking Account
+const jimsChecking = new CheckingAccount('Jim Henson', 5000);
+//Log Account Info and Balance
+console.log(jimsChecking.getBalance);
+//Withdraw 40 Dollars
+jimsChecking.withdraw(40);
+//Log Updated Account Info and Balance
+console.log(jimsChecking.getBalance)
+//Attempt to overdraw account with overdraftEnabled set to false
+jimsChecking.withdraw(5000);
+//Attempt to overdraw account with overdraftEnabled set to true
+jimsChecking.overdraftEnabled = true;
+jimsChecking.withdraw(5000);
+//Log Updated Account Info and Balance
+console.log(jimsChecking.getBalance);
+
+//Create a new Savings Account
+const patsChecking = new SavingsAccount('Patricia Benatar', 80);
+//Log Account Info and Balance
+console.log(patsChecking.getBalance);
+//Attempt to withdraw 40 Dollars
+patsChecking.withdraw(40);
 
 //The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
 
