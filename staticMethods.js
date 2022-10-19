@@ -70,35 +70,6 @@ class Chef extends Person{
     }
 }
 
-<<<<<<< HEAD
-const pepe = new Person('PePe', 'M', 28);
-pepe.greet();
-pepe.eat('chicken');
-pepe.sleep();
-
-const phil = new PostalWorker('Phil Lamarr', 'M', '30');
-phil.energyLevel = 'Over 9000';
-phil.greet();
-phil.eat('boogers');
-//phil doesn't sleep...
-
-const mo = new PostalWorker('Mo Collins', 'F', '28');
-mo.greet();
-//no one has ever seen mo eat...
-mo.sleep();
-
-const gordon = new Chef('Gordon Ramsay', 'M', 55);
-const giada = new Chef('Giada De Laurentiis', 'F', 52);
-
-gordon.greet();
-gordon.cook('Idiot Sandwich');
-gordon.evictPatron();
-
-giada.greet();
-giada.forehead = 'Really big';
-giada.cook();
-giada.spitInFood();
-=======
 // const pepe = new Person('PePe', 'M', 28);
 // pepe.greet();
 // pepe.eat('chicken');
@@ -248,4 +219,3 @@ const budgetProposals = [
     new BudgetProposal(), //create a budget proposal with default values,
     new BudgetProposal('1,000,000','500,000','38,000,000','500,000')
 ]
->>>>>>> stretch
