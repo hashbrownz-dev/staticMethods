@@ -26,6 +26,36 @@ Governor.enactLaw('The No Burritos After Midnight Law');
 //Test addressPublic
 Governor.addressPublic();
 
+class Person{
+    constructor(name, gender, age){
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+    }
+    greet(other){
+        let message = 'Hello';
+        if(other){
+            message += ` ${other}`;
+        }
+        console.log(message + '! My name is ' +this.name+ '!  I am ' + this.age + ' years old.  It is nice to meet you!');
+    }
+    eat(food){
+        let message = "Nom nom nom!";
+        if(food){
+            message += ' This ' + food + ' is delicious!';
+        }
+        console.log(message);
+    }
+    sleep(){
+        console.log('ZZZzzzZZZzzz...');
+    }
+}
+
+const pepe = new Person('PePe', 'M', 28);
+pepe.greet();
+pepe.eat('chicken');
+pepe.sleep();
+
 //The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
 
 class BudgetProposal{
