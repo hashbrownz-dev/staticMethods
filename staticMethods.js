@@ -107,6 +107,29 @@ giada.forehead = 'Really big';
 giada.cook();
 giada.spitInFood();
 
+//STREEEEEEEETCH
+
+class BankAccount {
+    constructor(ownerName, balance){
+        this.ownerName = ownerName;
+        this.balance = Number.isInteger(balance) ? balance : Money.toInt(balance);
+        this.accountNumber = BankAccount.generateAccountNumber();
+    }
+    static generateAccountNumber(){
+        const accountNumber = [];
+        for(let i = 0; i < 9; i++){
+            accountNumber.push(Math.floor(Math.random() * 10));
+        }
+        return Number(accountNumber.join(''));
+    }
+    deposit(amount){
+        this.balance += amount;
+    }
+    withdraw(amount){
+        this.balance -= amount;
+    }
+}
+
 //The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
 
 class BudgetProposal{
