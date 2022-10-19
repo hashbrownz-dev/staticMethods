@@ -21,6 +21,11 @@ class Governor{
     
 }
 
+//Test enactLaw
+Governor.enactLaw('The No Burritos After Midnight Law');
+//Test addressPublic
+Governor.addressPublic();
+
 //The BudgetProposal class contains four properties (sectors) with a string that represents a sum of money.  I used strings so I can use commas to better keep track of the costs.
 
 class BudgetProposal{
